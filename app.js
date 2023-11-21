@@ -12,10 +12,10 @@ const app = express();
 
 // Configuración de sesión
 app.use(session({
-  secret: process.env.SESSION_SECRET || 'default_secret', // Se recomienda usar una clave secreta desde las variables de entorno
+  secret: process.env.SESSION_SECRET || 'default_secret', 
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: false } // Configuración de la cookie (ajusta según tus necesidades)
+  cookie: { secure: false } 
 }));
 
 // Middleware
@@ -40,6 +40,11 @@ connect()
     console.error("Error al iniciar el servidor:", error);
   });
 
-module.exports = app; // Exportar la app si necesitas usarla en otros archivos
+//Get
+app.get('/',(req, res) => {
+  res.send('Hola, bienvenido!')
+})
+
+module.exports = app; 
 
 

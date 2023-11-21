@@ -21,7 +21,7 @@ router.post('/login', async (req, res) => {
     }
 
     const token = jwt.sign({ pacienteId: paciente._id }, process.env.JWT_SECRET, {
-      expiresIn: '1h', // Puedes ajustar la duración del token
+      expiresIn: '1h', // ajustar la duración del token
     });
 
     // Almacenar información en la sesión
