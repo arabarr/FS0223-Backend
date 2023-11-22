@@ -1,5 +1,6 @@
 const express = require('express');
 const session = require('express-session');
+const MongoDBStore = require ('connect-mongodb-session')(session)
 const cors = require('cors');
 const dotenv = require('dotenv');
 const medicoRoutes = require('./routes/medicoRoutes');
@@ -10,12 +11,23 @@ const { connect } = require('./db/connect');
 dotenv.config();
 const app = express();
 
+// Configuración de la conexión a MongoDB para almacenar las sesiones
+const store = new MongoDBStore({
+  uri: process.env.CONNECT_MONGODB, // Utiliza la misma conexión a MongoDB
+  collection: 'sessions', // Nombre de la colección para las sesiones
+});
+
+store.on('error', (error) => {
+  console.error('Error en el almacenamiento de sesiones:', error);
+});
+
 // Configuración de sesión
 app.use(session({
   secret: process.env.SESSION_SECRET || 'default_secret', 
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: false } 
+  cookie: { secure: false },
+  store, 
 }));
 
 // Middleware
