@@ -13,7 +13,7 @@ const app = express();
 
 // Configuración de la conexión a MongoDB para almacenar las sesiones
 const store = new MongoDBStore({
-  uri: process.env.CONNECT_MONGODB, // Utiliza la misma conexión a MongoDB
+  uri: process.env.MONGO_URL, // Utiliza la misma conexión a MongoDB
   collection: 'sessions', // Nombre de la colección para las sesiones
 });
 
@@ -50,6 +50,7 @@ connect()
   })
   .catch((error) => {
     console.error("Error al iniciar el servidor:", error);
+    process.exit(1); // Sale de la aplicación si hay un error en la conexión
   });
 
 //Get

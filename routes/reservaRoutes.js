@@ -28,7 +28,7 @@ router.put('/:id', [
   body('fecha').isISO8601().withMessage('La fecha de la reserva debe estar en formato ISO8601'),
   body('pacienteNombre').notEmpty().withMessage('El nombre del paciente es obligatorio'),
   body('medicoId').isMongoId().withMessage('ID de médico no válido'),
-], validatorMiddleware.validateFields, reservaController.updateReserva);
+], validatorMiddleware.validateUpdateMedico, reservaController.updateReserva);
 
 // Eliminar una reserva por su ID
 router.delete('/:id', [

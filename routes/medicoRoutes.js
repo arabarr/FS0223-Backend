@@ -25,7 +25,7 @@ router.put('/:id', [
   param('id').isMongoId().withMessage('ID de médico no válido'),
   body('nombre').notEmpty().withMessage('El nombre del médico es obligatorio'),
   body('especialidad').notEmpty().withMessage('La especialidad del médico es obligatoria'),
-],  validatorMiddleware.validateCreateMedico, medicoController.updateMedico);
+],  validatorMiddleware.validateUpdateMedico, medicoController.updateMedico);
 
 // Eliminar un médico por su ID
 router.delete('/:id', [
