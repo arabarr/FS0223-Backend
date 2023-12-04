@@ -1,6 +1,7 @@
 const express = require('express');
 const session = require('express-session');
 const MongoDBStore = require ('connect-mongodb-session')(session)
+const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const medicoRoutes = require('./routes/medicoRoutes');
@@ -20,6 +21,9 @@ const store = new MongoDBStore({
 store.on('error', (error) => {
   console.error('Error en el almacenamiento de sesiones:', error);
 });
+
+mongoose.connect('mongodb+srv://barriosaraceligabriela:Backend2319@cluster0.0utdshj.mongodb.net/Proyecto-Backend', {useNewUrlParser: true});
+var db = mongoose.connection;
 
 // Configuración de sesión
 app.use(session({
